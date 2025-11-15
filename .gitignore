@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Arquivos de template gerados (podem ser regenerados)
+frontend/template_faturamento_dualtax.xlsx
+frontend/template_faturamento_dualtax.csv
+
+# Variáveis de ambiente
+.env
+.env.local
+
+# Arquivos de teste
+test_*.py
+*_test.py
+

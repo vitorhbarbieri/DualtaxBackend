@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste Dualtax - v2.1.0</title>
+  <meta name="version" content="2.1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    button {
+      background: #3b82f6;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    #resultado {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e0f2fe;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div style="background: #fef3c7; color: #92400e; padding: 8px 16px; border-radius: 8px; margin-bottom: 15px; font-weight: bold; text-align: center;">
+      ✓ Versão 2.1.0 - Faturamento Mensal Ativado
+    </div>
+    <h1>🧪 Teste Rápido - Dualtax</h1>
+    <p>Se esta página carregar, o servidor está funcionando!</p>
+    <p style="color: #059669; font-weight: bold; margin-top: 10px;">
+      ⚠️ Esta é a página de TESTE. Para a versão completa, acesse: 
+      <a href="index.html" style="color: #0284c7; text-decoration: underline;">http://localhost:8080/index.html</a>
+    </p>
+    
+    <h2>Teste de Conexão com Backend</h2>
+    <input type="text" id="cnpj" placeholder="Digite um CNPJ (ex: 12345678000190)" value="12345678000190">
+    <br><br>
+    <button onclick="testarBackend()">Testar Backend</button>
+    
+    <div id="resultado"></div>
+  </div>
+
+  <div class="box">
+    <h2>📋 Status</h2>
+    <p><strong>Frontend:</strong> <span id="status-frontend">✅ Carregado</span></p>
+    <p><strong>Backend:</strong> <span id="status-backend">⏳ Testando...</span></p>
+  </div>
+
+  <script>
+    async function testarBackend() {
+      const cnpj = document.getElementById('cnpj').value.trim();
+      const resultado = document.getElementById('resultado');
+      const statusBackend = document.getElementById('status-backend');
+      
+      if (!cnpj) {
+        alert('Digite um CNPJ!');
+        return;
+      }
+
+      resultado.style.display = 'block';
+      resultado.innerHTML = '<p>🔄 Testando conexão...</p>';
+      statusBackend.textContent = '⏳ Testando...';
+
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/consultar_notas/${cnpj}`);
+        
+        if (!response.ok) {
+          throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        statusBackend.textContent = '✅ Conectado!';
+        resultado.innerHTML = `
+          <h3>✅ Sucesso! Backend está funcionando!</h3>
+          <p><strong>Total Entrada:</strong> R$ ${data.total_entrada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+          <p><strong>Total Saída:</strong> R$ ${data.total_saida.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+          <p><strong>Impacto Total:</strong> R$ ${data.impacto_total.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+          <p><strong>Período:</strong> ${data.periodo_mes} (${data.horizonte_temporal})</p>
+        `;
+      } catch (error) {
+        statusBackend.textContent = '❌ Erro de conexão';
+        resultado.innerHTML = `
+          <h3>❌ Erro ao conectar com o backend</h3>
+          <p><strong>Erro:</strong> ${error.message}</p>
+          <p><strong>Verifique:</strong></p>
+          <ul>
+            <li>O backend está rodando em http://localhost:8000?</li>
+            <li>Execute: <code>cd backend && python app.py</code></li>
+          </ul>
+        `;
+      }
+    }
+
+    // Teste automático ao carregar
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        testarBackend();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
+

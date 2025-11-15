@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dualtax - Simulação Reforma Tributária</title>
+  <meta name="version" content="3.4.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50">
+
+<!-- Hero Section -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 animate-pulse opacity-90"></div>
+  <div class="container mx-auto text-center relative py-32 px-4">
+    <div class="absolute top-4 right-4 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+      v3.1.0 - Correção Crítica
+    </div>
+    <h1 class="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">💼 Descubra o impacto da Reforma Tributária</h1>
+    <p class="text-xl md:text-2xl mb-10 text-white drop-shadow-md">Informe seu CNPJ, autorize o acesso às suas notas e veja o impacto em impostos e previdência.</p>
+    <a href="#mvp" class="inline-block bg-white text-blue-600 font-semibold py-4 px-8 rounded-xl shadow-lg hover:scale-110 transform transition duration-300">Simule agora</a>
+  </div>
+</section>
+
+<!-- Benefícios Section -->
+<section class="py-24">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-16">Benefícios do Dualtax</h2>
+    <div class="grid md:grid-cols-4 gap-10">
+      <div class="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transform hover:-translate-y-2 transition" data-aos="flip-left">
+        <i class="fas fa-robot fa-3x text-blue-500 mb-4"></i>
+        <h3 class="font-bold text-2xl mb-3">Automático</h3>
+        <p>Notas emitidas e recebidas são capturadas via API, sem upload manual.</p>
+      </div>
+      <div class="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transform hover:-translate-y-2 transition" data-aos="flip-left" data-aos-delay="100">
+        <i class="fas fa-calculator fa-3x text-green-500 mb-4"></i>
+        <h3 class="font-bold text-2xl mb-3">Simulação Completa</h3>
+        <p>Impostos atuais x novo modelo (CBS + IBS) em segundos.</p>
+      </div>
+      <div class="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transform hover:-translate-y-2 transition" data-aos="flip-left" data-aos-delay="200">
+        <i class="fas fa-hand-holding-usd fa-3x text-yellow-500 mb-4"></i>
+        <h3 class="font-bold text-2xl mb-3">Impacto Previdenciário</h3>
+        <p>Estima os encargos e possíveis compensações para sua empresa.</p>
+      </div>
+      <div class="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl transform hover:-translate-y-2 transition" data-aos="flip-left" data-aos-delay="300">
+        <i class="fas fa-shield-alt fa-3x text-red-500 mb-4"></i>
+        <h3 class="font-bold text-2xl mb-3">Rápido e Seguro</h3>
+        <p>Consentimento explícito e LGPD garantida, sem fricção para o usuário.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Como Funciona Section -->
+<section class="bg-blue-50 py-24">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-16">Como Funciona</h2>
+    <div class="relative max-w-5xl mx-auto">
+      <div class="border-l-4 border-blue-500 absolute h-full left-1/2 transform -translate-x-1/2"></div>
+      <div class="flex flex-col md:flex-row md:justify-between md:space-x-8">
+        <div class="bg-white rounded-3xl shadow-lg p-8 mb-8 md:mb-0 md:w-1/3 relative" data-aos="fade-right">
+          <i class="fas fa-id-card fa-2x text-blue-500 mb-3"></i>
+          <h3 class="font-bold text-2xl mb-2">1. Informe seu CNPJ</h3>
+          <p>Digite o CNPJ da sua empresa para começar a simulação.</p>
+        </div>
+        <div class="bg-white rounded-3xl shadow-lg p-8 mb-8 md:mb-0 md:w-1/3 relative" data-aos="fade-up">
+          <i class="fas fa-key fa-2x text-green-500 mb-3"></i>
+          <h3 class="font-bold text-2xl mb-2">2. Autorize o acesso</h3>
+          <p>Conceda permissão para capturarmos suas notas via API de forma segura.</p>
+        </div>
+        <div class="bg-white rounded-3xl shadow-lg p-8 md:w-1/3 relative" data-aos="fade-left">
+          <i class="fas fa-chart-line fa-2x text-purple-500 mb-3"></i>
+          <h3 class="font-bold text-2xl mb-2">3. Receba resultados</h3>
+          <p>Veja o impacto em impostos, previdência e sugestões de compensação instantaneamente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MVP Section -->
+<section id="mvp" class="py-24">
+  <div class="container mx-auto px-4 text-center">
+    <div class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+      ✓ Versão 3.4.0 - Erros Claros (Sem Mock)
+    </div>
+    <h2 class="text-4xl font-bold mb-4">Calcule o Impacto da Reforma Tributária</h2>
+    <p class="mb-8 text-lg text-gray-600">Informe o CNPJ da sua empresa e buscaremos automaticamente os dados via API</p>
+    
+    <!-- Formulário de Consulta por CNPJ -->
+    <form id="mvp-form" class="max-w-lg mx-auto bg-white rounded-3xl shadow-2xl p-10 relative">
+      <div class="mb-6">
+        <label class="block text-sm font-semibold mb-2 text-gray-700">
+          <i class="fas fa-building mr-2 text-blue-500"></i>CNPJ da Empresa
+        </label>
+        <input type="text" id="cnpj" placeholder="Digite o CNPJ (com ou sem formatação)" required 
+               class="w-full p-4 rounded-xl border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg">
+        <p class="text-xs text-gray-500 mt-2">
+          <i class="fas fa-info-circle mr-1"></i>
+          Buscaremos automaticamente: nome da empresa, CNAE, situação cadastral e dados fiscais
+        </p>
+      </div>
+      
+      <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg mb-6">
+        <div class="flex items-start">
+          <i class="fas fa-lightbulb text-blue-500 text-xl mr-3 mt-1"></i>
+          <div class="text-sm text-blue-800">
+            <p class="font-semibold mb-1">✨ Busca Automática via API</p>
+            <p class="text-xs">Utilizamos APIs gratuitas do mercado para buscar informações da empresa e calcular o impacto tributário com precisão.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex items-center mb-6">
+        <input type="checkbox" id="consent" required class="mr-3 w-5 h-5">
+        <label class="text-sm text-gray-700">Li e aceito os termos de uso e políticas de privacidade</label>
+      </div>
+      <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-4 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition transform hover:scale-105 shadow-lg">
+        <span id="btn-text">
+          <i class="fas fa-search mr-2"></i>Buscar e Calcular Impacto
+        </span>
+        <span id="btn-loading" class="hidden">
+          <i class="fas fa-spinner fa-spin mr-2"></i> Buscando dados da empresa...
+        </span>
+      </button>
+    </form>
+    
+    <!-- Resultado Section -->
+    <div id="mvp-result" class="mt-12 max-w-7xl mx-auto hidden">
+      <!-- Validação do Agente Tributário -->
+      <div id="validacao-tributaria" class="mb-6 hidden">
+        <!-- Será preenchido via JavaScript -->
+      </div>
+      
+      <!-- Disclaimer da Empresa -->
+      <div id="disclaimer-empresa" class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-r-lg shadow-md" data-aos="fade-down">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <i class="fas fa-building text-blue-500 text-xl mr-3"></i>
+            <div>
+              <p class="text-sm text-blue-700 font-semibold">Empresa encontrada:</p>
+              <p class="text-lg text-blue-900 font-bold" id="nome-empresa-disclaimer">-</p>
+              <p class="text-xs text-blue-600 mt-1" id="cnpj-disclaimer">CNPJ: -</p>
+            </div>
+          </div>
+          <div id="info-empresa-api" class="text-xs text-blue-500 hidden">
+            <i class="fas fa-check-circle mr-1"></i>
+            <span>Dados via API</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Seção de Debug: Dados Enviados e Recebidos -->
+      <div class="bg-gray-50 rounded-2xl shadow-lg p-6 mb-8" data-aos="fade-up">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold text-gray-800 flex items-center">
+            <i class="fas fa-code mr-2 text-indigo-500"></i>
+            🔍 Dados da Comunicação API
+          </h3>
+          <button id="toggle-api-debug" class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold flex items-center">
+            <i class="fas fa-chevron-down mr-1" id="toggle-icon"></i>
+            <span id="toggle-text">Mostrar Detalhes</span>
+          </button>
+        </div>
+        
+        <div id="api-debug-content" class="hidden space-y-4">
+          <!-- Dados Enviados (Request) -->
+          <div class="bg-white rounded-lg p-4 border-l-4 border-green-500">
+            <h4 class="font-bold text-green-700 mb-3 flex items-center">
+              <i class="fas fa-paper-plane mr-2"></i>
+              📤 Dados Enviados para API (Request)
+            </h4>
+            <div class="bg-gray-50 rounded p-3 font-mono text-xs overflow-x-auto">
+              <pre id="request-data" class="text-gray-800 whitespace-pre-wrap"></pre>
+            </div>
+          </div>
+          
+          <!-- Dados Recebidos (Response) -->
+          <div class="bg-white rounded-lg p-4 border-l-4 border-blue-500">
+            <h4 class="font-bold text-blue-700 mb-3 flex items-center">
+              <i class="fas fa-inbox mr-2"></i>
+              📥 Dados Recebidos da API (Response)
+            </h4>
+            <div class="bg-gray-50 rounded p-3 font-mono text-xs overflow-x-auto max-h-96 overflow-y-auto">
+              <pre id="response-data" class="text-gray-800 whitespace-pre-wrap"></pre>
+            </div>
+          </div>
+          
+          <!-- Informações da API -->
+          <div class="bg-white rounded-lg p-4 border-l-4 border-purple-500">
+            <h4 class="font-bold text-purple-700 mb-3 flex items-center">
+              <i class="fas fa-info-circle mr-2"></i>
+              ℹ️ Informações da API
+            </h4>
+            <div id="api-info" class="text-sm text-gray-700 space-y-2">
+              <!-- Preenchido via JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Período de Consulta -->
+      <div class="bg-white rounded-2xl shadow-xl p-6 mb-8" data-aos="fade-down">
+        <div class="flex items-center justify-center space-x-4">
+          <i class="fas fa-calendar-alt fa-2x text-blue-500"></i>
+          <div class="text-left">
+            <p class="text-sm text-gray-600">Período de Consulta</p>
+            <p class="text-xl font-bold" id="periodo-texto"></p>
+            <p class="text-sm text-gray-500" id="horizonte-texto"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards de Resultados -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl shadow-xl p-6 transform hover:scale-105 transition" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center justify-between mb-4">
+            <i class="fas fa-arrow-down fa-2x"></i>
+            <span class="text-3xl font-bold" id="total-entrada">R$ 0,00</span>
+          </div>
+          <p class="text-blue-100">Total de Entradas</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-red-500 to-red-600 text-white rounded-2xl shadow-xl p-6 transform hover:scale-105 transition" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center justify-between mb-4">
+            <i class="fas fa-arrow-up fa-2x"></i>
+            <span class="text-3xl font-bold" id="total-saida">R$ 0,00</span>
+          </div>
+          <p class="text-red-100">Total de Saídas</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl shadow-xl p-6 transform hover:scale-105 transition" data-aos="fade-up" data-aos-delay="300">
+          <div class="flex items-center justify-between mb-4">
+            <i class="fas fa-chart-line fa-2x"></i>
+            <span class="text-3xl font-bold" id="impacto-total">R$ 0,00</span>
+          </div>
+          <p class="text-purple-100">Impacto Total</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="flex items-center justify-between mb-2">
+            <i class="fas fa-receipt fa-xl text-green-500"></i>
+            <span class="text-2xl font-bold text-gray-800" id="impacto-cbs">R$ 0,00</span>
+          </div>
+          <p class="text-gray-600 text-sm">Impacto CBS (12%)</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="flex items-center justify-between mb-2">
+            <i class="fas fa-file-invoice fa-xl text-indigo-500"></i>
+            <span class="text-2xl font-bold text-gray-800" id="impacto-ibs">R$ 0,00</span>
+          </div>
+          <p class="text-gray-600 text-sm">Impacto IBS (5%)</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-lg p-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="flex items-center justify-between mb-2">
+            <i class="fas fa-shield-alt fa-xl text-yellow-500"></i>
+            <span class="text-2xl font-bold text-gray-800" id="impacto-previdencia">R$ 0,00</span>
+          </div>
+          <p class="text-gray-600 text-sm">Impacto Previdência (2%)</p>
+        </div>
+      </div>
+
+      <!-- Gráficos -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-xl p-6" data-aos="fade-right">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Comparação de Impactos</h3>
+          <canvas id="chart-impactos"></canvas>
+        </div>
+        <div class="bg-white rounded-2xl shadow-xl p-6" data-aos="fade-left">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Distribuição de Valores</h3>
+          <canvas id="chart-distribuicao"></canvas>
+        </div>
+      </div>
+
+      <!-- Tabela de Faturamento Mensal -->
+      <div class="bg-white rounded-2xl shadow-xl p-6 mb-8" data-aos="fade-up">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-2xl font-bold text-gray-800">📊 Faturamento Mensal - Ano 2025</h3>
+          <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
+            Detalhamento mensal
+          </span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-gray-50 border-b-2 border-gray-200">
+              <tr>
+                <th class="px-4 py-3 font-semibold text-gray-700">Mês</th>
+                <th class="px-4 py-3 font-semibold text-gray-700 text-right">Faturamento Entrada (R$)</th>
+                <th class="px-4 py-3 font-semibold text-gray-700 text-right">Faturamento Saída (R$)</th>
+                <th class="px-4 py-3 font-semibold text-gray-700 text-right">Net (R$)</th>
+                <th class="px-4 py-3 font-semibold text-gray-700 text-right">Imposto Apurado (R$)</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-faturamento" class="divide-y divide-gray-200">
+              <!-- Preenchido via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Gráfico de Faturamento Mensal -->
+      <div class="bg-white rounded-2xl shadow-xl p-6 mb-8" data-aos="fade-up">
+        <h3 class="text-xl font-bold mb-4 text-gray-800">Evolução do Faturamento - Ano 2025</h3>
+        <canvas id="chart-faturamento-mensal"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-indigo-600 text-white py-12">
+  <div class="container mx-auto px-4 text-center">
+    <p>&copy; 2025 Dualtax. Todos os direitos reservados.</p>
+    <p class="mt-2 text-sm text-indigo-200">
+      Versão <span class="font-bold text-yellow-300">3.4.0</span> - 
+      <span class="text-xs">Apenas Notas 2025 | Faturamento Mensal | Gráficos Interativos</span>
+    </p>
+    <div class="flex justify-center space-x-6 mt-4">
+      <a href="#" class="hover:text-gray-200"><i class="fab fa-facebook fa-lg"></i></a>
+      <a href="#" class="hover:text-gray-200"><i class="fab fa-linkedin fa-lg"></i></a>
+      <a href="#" class="hover:text-gray-200"><i class="fab fa-twitter fa-lg"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+
+  function showConfetti() {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
+
+  function formatarMoeda(valor) {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(valor);
+  }
+
+  function formatarData(dataStr) {
+    const data = new Date(dataStr);
+    return data.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
+
+  let chartImpactos = null;
+  let chartDistribuicao = null;
+  let chartFaturamentoMensal = null;
+
+  function preencherTabelaFaturamento(faturamentoMensal) {
+    console.log('Preenchendo tabela de faturamento...', faturamentoMensal);
+    const tbody = document.getElementById('tabela-faturamento');
+    
+    if (!tbody) {
+      console.error('Elemento tbody não encontrado!');
+      return;
+    }
+    
+    tbody.innerHTML = '';
+    
+    if (!faturamentoMensal || faturamentoMensal.length === 0) {
+      console.warn('Nenhum dado de faturamento mensal disponível');
+      tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-3 text-center text-gray-500">Nenhum dado disponível</td></tr>';
+      return;
+    }
+    
+    // Filtra apenas meses de 2025 e ordena (Janeiro primeiro)
+    const faturamento2025 = faturamentoMensal.filter(item => {
+      const ano = item.mes ? item.mes.substring(0, 4) : '';
+      return ano === '2025';
+    });
+    
+    const faturamentoOrdenado = [...faturamento2025].sort((a, b) => {
+      // Ordena por data (mes) - Janeiro primeiro
+      return a.mes.localeCompare(b.mes);
+    });
+    
+    console.log(`Preenchendo ${faturamentoOrdenado.length} meses de 2025 na tabela`);
+    
+    if (faturamentoOrdenado.length === 0) {
+      console.warn('Nenhum dado de 2025 encontrado!');
+      tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-3 text-center text-gray-500">Nenhum dado de 2025 disponível</td></tr>';
+      return;
+    }
+    
+    faturamentoOrdenado.forEach((item, index) => {
+      // Calcula valores do mês
+      const entrada = item.total_entrada || 0;
+      const saida = item.total_saida || 0;
+      const net = entrada - saida;
+      
+      // Calcula imposto apurado no mês
+      // CBS: 12% sobre saídas
+      // IBS: 5% sobre saídas
+      // Previdência: 2% sobre entradas
+      // Imposto Total = CBS + IBS - Previdência
+      const cbs_mes = saida * 0.12;
+      const ibs_mes = saida * 0.05;
+      const previdencia_mes = entrada * 0.02;
+      const imposto_apurado = cbs_mes + ibs_mes - previdencia_mes;
+      
+      const rowClass = entrada === 0 && saida === 0 ? 'bg-gray-50 opacity-60' : '';
+      
+      const row = document.createElement('tr');
+      row.className = rowClass;
+      row.innerHTML = `
+        <td class="px-4 py-3 font-medium text-gray-900">${item.mes_formatado || item.mes || 'N/A'}</td>
+        <td class="px-4 py-3 text-right ${entrada > 0 ? 'text-green-600 font-semibold' : 'text-gray-400'}">
+          ${entrada > 0 ? formatarMoeda(entrada) : '-'}
+        </td>
+        <td class="px-4 py-3 text-right ${saida > 0 ? 'text-red-600 font-semibold' : 'text-gray-400'}">
+          ${saida > 0 ? formatarMoeda(saida) : '-'}
+        </td>
+        <td class="px-4 py-3 text-right font-semibold ${net >= 0 ? 'text-green-600' : 'text-red-600'}">
+          ${formatarMoeda(net)}
+        </td>
+        <td class="px-4 py-3 text-right font-semibold ${imposto_apurado >= 0 ? 'text-blue-600' : 'text-orange-600'}">
+          ${formatarMoeda(imposto_apurado)}
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+    
+    console.log('Tabela preenchida com sucesso!');
+  }
+
+  function criarGraficoFaturamentoMensal(faturamentoMensal) {
+    // Destruir gráfico anterior se existir
+    if (chartFaturamentoMensal) chartFaturamentoMensal.destroy();
+    
+    // Filtra apenas 2025 e ordena (Janeiro primeiro)
+    const faturamento2025 = faturamentoMensal.filter(item => {
+      const ano = item.mes ? item.mes.substring(0, 4) : '';
+      return ano === '2025';
+    });
+    
+    const faturamentoOrdenado = [...faturamento2025].sort((a, b) => {
+      return a.mes.localeCompare(b.mes);
+    });
+    
+    const ctx = document.getElementById('chart-faturamento-mensal');
+    const labels = faturamentoOrdenado.map(item => {
+      // Formata como "Jan/2025" ou "Jan/25"
+      const partes = item.mes_formatado.split('/');
+      const mesAbrev = partes[0].substring(0, 3);
+      return `${mesAbrev}/25`;
+    });
+    
+    chartFaturamentoMensal = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Entradas',
+            data: faturamentoOrdenado.map(item => item.total_entrada),
+            borderColor: 'rgba(34, 197, 94, 1)',
+            backgroundColor: 'rgba(34, 197, 94, 0.1)',
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Saídas',
+            data: faturamentoOrdenado.map(item => item.total_saida),
+            borderColor: 'rgba(239, 68, 68, 1)',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            tension: 0.4,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `${context.dataset.label}: ${formatarMoeda(context.parsed.y)}`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return 'R$ ' + value.toLocaleString('pt-BR');
+              }
+            }
+          },
+          x: {
+            ticks: {
+              maxRotation: 45,
+              minRotation: 45
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function criarGraficos(resultado) {
+    // Destruir gráficos anteriores se existirem
+    if (chartImpactos) chartImpactos.destroy();
+    if (chartDistribuicao) chartDistribuicao.destroy();
+
+    // Gráfico de Comparação de Impactos
+    const ctxImpactos = document.getElementById('chart-impactos');
+    chartImpactos = new Chart(ctxImpactos, {
+      type: 'bar',
+      data: {
+        labels: ['CBS', 'IBS', 'Previdência'],
+        datasets: [{
+          label: 'Valor (R$)',
+          data: [
+            resultado.impacto_cbs,
+            resultado.impacto_ibs,
+            Math.abs(resultado.impacto_previdencia)
+          ],
+          backgroundColor: [
+            'rgba(59, 130, 246, 0.8)',
+            'rgba(99, 102, 241, 0.8)',
+            'rgba(234, 179, 8, 0.8)'
+          ],
+          borderColor: [
+            'rgba(59, 130, 246, 1)',
+            'rgba(99, 102, 241, 1)',
+            'rgba(234, 179, 8, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function(value) {
+                return 'R$ ' + value.toLocaleString('pt-BR');
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Gráfico de Distribuição (Pizza)
+    const ctxDistribuicao = document.getElementById('chart-distribuicao');
+    chartDistribuicao = new Chart(ctxDistribuicao, {
+      type: 'doughnut',
+      data: {
+        labels: ['Entradas', 'Saídas'],
+        datasets: [{
+          data: [resultado.total_entrada, resultado.total_saida],
+          backgroundColor: [
+            'rgba(34, 197, 94, 0.8)',
+            'rgba(239, 68, 68, 0.8)'
+          ],
+          borderColor: [
+            'rgba(34, 197, 94, 1)',
+            'rgba(239, 68, 68, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = formatarMoeda(context.parsed);
+                const total = resultado.total_entrada + resultado.total_saida;
+                const percent = ((context.parsed / total) * 100).toFixed(1);
+                return `${label}: ${value} (${percent}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // Gerenciamento de Tabs - REMOVIDO (não mais necessário)
+  
+  // Formulário principal - busca por CNPJ
+  document.getElementById('mvp-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const cnpj = document.getElementById('cnpj').value.trim();
+    const consent = document.getElementById('consent').checked;
+    const resultEl = document.getElementById('mvp-result');
+    const btnText = document.getElementById('btn-text');
+    const btnLoading = document.getElementById('btn-loading');
+    
+    if (!cnpj || !consent) {
+      alert('Por favor, informe o CNPJ e aceite os termos!');
+      return;
+    }
+    
+    // Mostrar loading
+    btnText.classList.add('hidden');
+    btnLoading.classList.remove('hidden');
+    resultEl.classList.add('hidden');
+    
+    try {
+      // Preparar dados do request
+      const cnpjLimpo = cnpj.replace(/[^\d]/g, '');
+      const requestData = {
+        url: `http://127.0.0.1:8000/consultar_notas/${encodeURIComponent(cnpjLimpo)}`,
+        endpoint: `/consultar_notas/${cnpjLimpo}`,
+        method: 'GET',
+        cnpj_original: cnpj,
+        cnpj_limpo: cnpjLimpo,
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        },
+        timestamp: new Date().toISOString()
+      };
+      
+      // Mostrar dados do request
+      mostrarDadosAPI(requestData, null);
+      
+      const resultado = await fetchImpacto(cnpj);
+      
+      // Mostrar dados do response
+      mostrarDadosAPI(requestData, resultado);
+      
+      // Mostrar informações de debug se disponíveis
+      if (resultado.debug_info) {
+        console.log('🔍 DEBUG INFO:', resultado.debug_info);
+        mostrarDebugInfo(resultado.debug_info);
+      }
+      
+      // Atualizar UI com os resultados
+      atualizarResultados(resultado);
+      
+      resultEl.classList.remove('hidden');
+      resultEl.scrollIntoView({ behavior: 'smooth' });
+      showConfetti();
+      
+    } catch (err) {
+      console.error('❌ ERRO AO BUSCAR DADOS:', err);
+      
+      // Mostrar erro detalhado no frontend
+      const errorMessage = err.message || 'Erro desconhecido';
+      let userMessage = '❌ Erro ao buscar dados da empresa';
+      
+      if (errorMessage.includes('404') || errorMessage.includes('não encontrado')) {
+        userMessage = '❌ CNPJ não encontrado na base de dados da Receita Federal.\n\nVerifique se o CNPJ está correto e tente novamente.';
+      } else if (errorMessage.includes('Timeout') || errorMessage.includes('504')) {
+        userMessage = '⏱️ Timeout ao consultar API externa.\n\nA API pode estar sobrecarregada. Tente novamente em alguns instantes.';
+      } else if (errorMessage.includes('conexão') || errorMessage.includes('503')) {
+        userMessage = '🌐 Erro de conexão com a API externa.\n\nVerifique sua conexão com a internet e tente novamente.';
+      } else if (errorMessage.includes('500')) {
+        userMessage = '⚠️ Erro interno no servidor.\n\nTente novamente mais tarde ou entre em contato com o suporte.';
+      } else {
+        userMessage = `❌ Erro ao buscar dados: ${errorMessage}`;
+      }
+      
+      alert(userMessage);
+      
+      // Mostrar erro na seção de debug também
+      const requestEl = document.getElementById('request-data');
+      const responseEl = document.getElementById('response-data');
+      if (requestEl) {
+        requestEl.textContent = JSON.stringify({
+          error: true,
+          message: errorMessage,
+          timestamp: new Date().toISOString()
+        }, null, 2);
+      }
+      if (responseEl) {
+        responseEl.textContent = JSON.stringify({
+          error: true,
+          message: errorMessage,
+          detail: err.toString(),
+          timestamp: new Date().toISOString()
+        }, null, 2);
+      }
+    } finally {
+      btnText.classList.remove('hidden');
+      btnLoading.classList.add('hidden');
+    }
+  });
+  
+  // Toggle para mostrar/ocultar detalhes da API
+  document.getElementById('toggle-api-debug').addEventListener('click', function() {
+    const content = document.getElementById('api-debug-content');
+    const icon = document.getElementById('toggle-icon');
+    const text = document.getElementById('toggle-text');
+    
+    if (content.classList.contains('hidden')) {
+      content.classList.remove('hidden');
+      icon.classList.remove('fa-chevron-down');
+      icon.classList.add('fa-chevron-up');
+      text.textContent = 'Ocultar Detalhes';
+    } else {
+      content.classList.add('hidden');
+      icon.classList.remove('fa-chevron-up');
+      icon.classList.add('fa-chevron-down');
+      text.textContent = 'Mostrar Detalhes';
+    }
+  });
+  
+  // Função para mostrar dados da comunicação API
+  function mostrarDadosAPI(requestData, responseData) {
+    // Mostrar dados do request
+    const requestEl = document.getElementById('request-data');
+    if (requestEl && requestData) {
+      requestEl.textContent = JSON.stringify(requestData, null, 2);
+    }
+    
+    // Mostrar dados do response
+    const responseEl = document.getElementById('response-data');
+    if (responseEl && responseData) {
+      // Mostrar TODOS os dados do response de forma completa
+      const formattedResponse = {
+        nome_empresa: responseData.nome_empresa,
+        cnpj: responseData.cnpj,
+        total_entrada: responseData.total_entrada,
+        total_saida: responseData.total_saida,
+        impacto_cbs: responseData.impacto_cbs,
+        impacto_ibs: responseData.impacto_ibs,
+        impacto_previdencia: responseData.impacto_previdencia,
+        impacto_total: responseData.impacto_total,
+        periodo_inicio: responseData.periodo_inicio,
+        periodo_fim: responseData.periodo_fim,
+        periodo_mes: responseData.periodo_mes,
+        horizonte_temporal: responseData.horizonte_temporal,
+        faturamento_mensal: responseData.faturamento_mensal || [],
+        faturamento_mensal_count: responseData.faturamento_mensal ? responseData.faturamento_mensal.length : 0,
+        debug_info: responseData.debug_info || {},
+        validacao_tributaria: responseData.validacao_tributaria || null
+      };
+      responseEl.textContent = JSON.stringify(formattedResponse, null, 2);
+    }
+    
+    // Mostrar informações da API
+    const apiInfoEl = document.getElementById('api-info');
+    if (apiInfoEl && responseData) {
+      const debugInfo = responseData.debug_info || {};
+      let html = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="font-semibold text-gray-800">Versão do Processamento:</p>
+            <p class="text-indigo-600">${debugInfo.versao_processamento || 'N/A'}</p>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Fonte dos Dados:</p>
+            <p class="text-indigo-600">${debugInfo.fonte || 'N/A'}</p>
+          </div>
+      `;
+      
+      if (debugInfo.cnae_principal) {
+        html += `
+          <div>
+            <p class="font-semibold text-gray-800">CNAE Principal:</p>
+            <p class="text-indigo-600">${debugInfo.cnae_principal}</p>
+            <p class="text-xs text-gray-500">${debugInfo.cnae_descricao || ''}</p>
+          </div>
+        `;
+      }
+      
+      if (debugInfo.situacao) {
+        html += `
+          <div>
+            <p class="font-semibold text-gray-800">Situação Cadastral:</p>
+            <p class="text-indigo-600">${debugInfo.situacao}</p>
+          </div>
+        `;
+      }
+      
+      if (debugInfo.regime_tributario) {
+        html += `
+          <div>
+            <p class="font-semibold text-gray-800">Regime Tributário:</p>
+            <p class="text-indigo-600">${debugInfo.regime_tributario}</p>
+          </div>
+        `;
+      }
+      
+      html += `
+          <div>
+            <p class="font-semibold text-gray-800">URL da API:</p>
+            <p class="text-xs text-indigo-600 break-all">http://127.0.0.1:8000/consultar_notas/${requestData?.cnpj_limpo || 'N/A'}</p>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Método HTTP:</p>
+            <p class="text-indigo-600">${requestData?.method || 'GET'}</p>
+          </div>
+        </div>
+      `;
+      
+      // Status da API de dados da empresa
+      if (debugInfo.fonte === 'API Externa') {
+        html += `
+          <div class="mt-4 bg-green-50 border-l-4 border-green-500 p-3 rounded">
+            <p class="text-sm text-green-800">
+              <i class="fas fa-check-circle mr-2"></i>
+              <strong>✅ Dados Reais:</strong> Empresa encontrada via API externa (BrasilAPI).
+            </p>
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="mt-4 bg-red-50 border-l-4 border-red-500 p-3 rounded">
+            <p class="text-sm text-red-800">
+              <i class="fas fa-times-circle mr-2"></i>
+              <strong>❌ Erro:</strong> Não foi possível obter dados da empresa via API.
+            </p>
+          </div>
+        `;
+      }
+      
+      // Avisos sobre dados faltantes
+      if (debugInfo.avisos && debugInfo.avisos.length > 0) {
+        debugInfo.avisos.forEach(aviso => {
+          html += `
+            <div class="mt-4 bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded">
+              <p class="text-sm text-yellow-800">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                <strong>⚠️ Aviso:</strong> ${aviso}
+              </p>
+            </div>
+          `;
+        });
+      }
+      
+      // Status das notas fiscais
+      html += `
+        <div class="mt-4 bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
+          <p class="text-sm text-blue-800">
+            <i class="fas fa-info-circle mr-2"></i>
+            <strong>ℹ️ Notas Fiscais:</strong> Integração com API de notas fiscais ainda não implementada. 
+            Valores serão zerados até que a integração seja feita.
+          </p>
+        </div>
+      `;
+      
+      html += `</div>`;
+      
+      apiInfoEl.innerHTML = html;
+      
+      // Expandir automaticamente a seção quando houver dados
+      const content = document.getElementById('api-debug-content');
+      if (content && responseData) {
+        content.classList.remove('hidden');
+        document.getElementById('toggle-icon').classList.remove('fa-chevron-down');
+        document.getElementById('toggle-icon').classList.add('fa-chevron-up');
+        document.getElementById('toggle-text').textContent = 'Ocultar Detalhes';
+      }
+    }
+  }
+  
+  function mostrarDebugInfo(debugInfo) {
+    console.log('🔍 Informações de Debug:', debugInfo);
+    
+    // Criar ou atualizar seção de debug
+    let debugSection = document.getElementById('debug-info-section');
+    if (!debugSection) {
+      debugSection = document.createElement('div');
+      debugSection.id = 'debug-info-section';
+      debugSection.className = 'bg-gray-50 border-l-4 border-blue-500 p-6 rounded-r-lg shadow-md mb-6';
+      const resultEl = document.getElementById('mvp-result');
+      if (resultEl && resultEl.parentNode) {
+        resultEl.parentNode.insertBefore(debugSection, resultEl);
+      }
+    }
+    
+    const mapeamento = debugInfo.mapeamento_colunas || debugInfo.colunas_identificadas || {};
+    
+    let html = `
+      <div class="mb-4">
+        <h3 class="text-lg font-bold mb-2">🔍 Informações de Debug (Versão ${debugInfo.versao_processamento || 'N/A'})</h3>
+        
+        <div class="bg-white p-4 rounded border mb-4">
+          <h4 class="font-semibold mb-3 text-blue-600">📋 MAPEAMENTO: Excel → Frontend</h4>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm border-collapse">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="px-3 py-2 text-left border">Coluna no Excel</th>
+                  <th class="px-3 py-2 text-left border">→</th>
+                  <th class="px-3 py-2 text-left border">Coluna no Frontend</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b">
+                  <td class="px-3 py-2 border font-mono text-xs">${mapeamento.excel_mes || mapeamento.mes || 'N/A'}</td>
+                  <td class="px-3 py-2 border text-center">→</td>
+                  <td class="px-3 py-2 border">${mapeamento.frontend_mes || 'Mês/Ano'}</td>
+                </tr>
+                <tr class="border-b bg-green-50">
+                  <td class="px-3 py-2 border font-mono text-xs">${mapeamento.excel_entrada || mapeamento.entrada || 'N/A'}</td>
+                  <td class="px-3 py-2 border text-center">→</td>
+                  <td class="px-3 py-2 border font-semibold text-green-700">${mapeamento.frontend_entrada || 'Entradas (R$)'}</td>
+                </tr>
+                <tr class="border-b bg-red-50">
+                  <td class="px-3 py-2 border font-mono text-xs">${mapeamento.excel_saida || mapeamento.saida || 'N/A'}</td>
+                  <td class="px-3 py-2 border text-center">→</td>
+                  <td class="px-3 py-2 border font-semibold text-red-700">${mapeamento.frontend_saida || 'Saídas (R$)'}</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="px-3 py-2 border font-mono text-xs">${mapeamento.excel_qtd_entrada || mapeamento.qtd_entrada || 'N/A'}</td>
+                  <td class="px-3 py-2 border text-center">→</td>
+                  <td class="px-3 py-2 border">${mapeamento.frontend_qtd_entrada || 'Qtd. Notas Entrada'}</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="px-3 py-2 border font-mono text-xs">${mapeamento.excel_qtd_saida || mapeamento.qtd_saida || 'N/A'}</td>
+                  <td class="px-3 py-2 border text-center">→</td>
+                  <td class="px-3 py-2 border">${mapeamento.frontend_qtd_saida || 'Qtd. Notas Saída'}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div class="bg-white p-4 rounded border">
+          <h4 class="font-semibold mb-2">Colunas Identificadas (Resumo):</h4>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li><strong>Mês:</strong> ${mapeamento.excel_mes || mapeamento.mes || 'N/A'}</li>
+            <li><strong>Entrada (valor):</strong> ${mapeamento.excel_entrada || mapeamento.entrada || 'N/A'}</li>
+            <li><strong>Saída (valor):</strong> ${mapeamento.excel_saida || mapeamento.saida || 'N/A'}</li>
+            <li><strong>Qtd. Entrada:</strong> ${mapeamento.excel_qtd_entrada || mapeamento.qtd_entrada || 'N/A'}</li>
+            <li><strong>Qtd. Saída:</strong> ${mapeamento.excel_qtd_saida || mapeamento.qtd_saida || 'N/A'}</li>
+          </ul>
+        </div>
+    `;
+    
+    if (debugInfo.primeiras_linhas_processadas && debugInfo.primeiras_linhas_processadas.length > 0) {
+      html += `
+        <div class="bg-white p-4 rounded border mt-4">
+          <h4 class="font-semibold mb-2">Primeiras Linhas Processadas:</h4>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+              <thead>
+                <tr class="bg-gray-100">
+                  <th class="px-2 py-1 text-left">Linha</th>
+                  <th class="px-2 py-1 text-left">Mês</th>
+                  <th class="px-2 py-1 text-left">Entrada (Lida)</th>
+                  <th class="px-2 py-1 text-left">Entrada (Processada)</th>
+                  <th class="px-2 py-1 text-left">Saída (Lida)</th>
+                  <th class="px-2 py-1 text-left">Saída (Processada)</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+      
+      debugInfo.primeiras_linhas_processadas.forEach(linha => {
+        html += `
+          <tr class="border-t">
+            <td class="px-2 py-1">${linha.linha}</td>
+            <td class="px-2 py-1">${linha.mes_original}</td>
+            <td class="px-2 py-1">${linha.entrada_lida}</td>
+            <td class="px-2 py-1 font-semibold">${linha.entrada_processada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+            <td class="px-2 py-1">${linha.saida_lida}</td>
+            <td class="px-2 py-1 font-semibold">${linha.saida_processada.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</td>
+          </tr>
+        `;
+      });
+      
+      html += `</tbody></table></div></div>`;
+    }
+    
+    html += `</div>`;
+    debugSection.innerHTML = html;
+    debugSection.classList.remove('hidden');
+  }
+
+  function mostrarValidacaoTributaria(validacao) {
+    const container = document.getElementById('validacao-tributaria');
+    if (!container) return;
+    
+    const nivel = validacao.nivel_confianca;
+    let bgColor = 'bg-green-50';
+    let borderColor = 'border-green-500';
+    let icon = '✅';
+    
+    if (nivel === 'Médio') {
+      bgColor = 'bg-yellow-50';
+      borderColor = 'border-yellow-500';
+      icon = '⚠️';
+    } else if (nivel === 'Baixo') {
+      bgColor = 'bg-red-50';
+      borderColor = 'border-red-500';
+      icon = '❌';
+    }
+    
+    let html = `
+      <div class="${bgColor} border-l-4 ${borderColor} p-6 rounded-r-lg shadow-md">
+        <div class="flex items-start">
+          <div class="text-3xl mr-4">${icon}</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold mb-2">🔍 Análise do Agente Especialista em Tributos</h3>
+            <p class="text-lg mb-4">${validacao.mensagem}</p>
+            <p class="text-sm font-semibold mb-2">Nível de Confiança: <span class="text-blue-600">${nivel}</span></p>
+    `;
+    
+    if (validacao.dados_faltantes && validacao.dados_faltantes.length > 0) {
+      html += `
+        <div class="mt-4">
+          <p class="font-semibold text-red-600 mb-2">Dados Faltantes:</p>
+          <ul class="list-disc list-inside text-sm">
+      `;
+      validacao.dados_faltantes.forEach(item => {
+        html += `<li>${item}</li>`;
+      });
+      html += `</ul></div>`;
+    }
+    
+    if (validacao.recomendacoes && validacao.recomendacoes.length > 0) {
+      html += `
+        <div class="mt-4">
+          <p class="font-semibold text-blue-600 mb-2">Recomendações:</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+      `;
+      validacao.recomendacoes.forEach(rec => {
+        html += `<li>${rec}</li>`;
+      });
+      html += `</ul></div>`;
+    }
+    
+    html += `</div></div></div>`;
+    container.innerHTML = html;
+    container.classList.remove('hidden');
+  }
+
+  function atualizarResultados(resultado) {
+    // Atualizar disclaimer da empresa
+    console.log('Dados da empresa recebidos:', resultado.nome_empresa, resultado.cnpj);
+    if (resultado.nome_empresa && resultado.nome_empresa !== '-') {
+      document.getElementById('nome-empresa-disclaimer').textContent = resultado.nome_empresa;
+    } else {
+      document.getElementById('nome-empresa-disclaimer').textContent = 'Carregando...';
+    }
+    
+    if (resultado.cnpj && resultado.cnpj !== '-') {
+      document.getElementById('cnpj-disclaimer').textContent = `CNPJ: ${resultado.cnpj}`;
+    } else {
+      document.getElementById('cnpj-disclaimer').textContent = 'CNPJ: Carregando...';
+    }
+    
+    // Atualizar período
+    console.log('Período recebido:', resultado.periodo_inicio, resultado.periodo_fim, resultado.horizonte_temporal);
+    if (resultado.periodo_inicio && resultado.periodo_fim) {
+      document.getElementById('periodo-texto').textContent = 
+        `${formatarData(resultado.periodo_inicio)} até ${formatarData(resultado.periodo_fim)}`;
+    } else {
+      document.getElementById('periodo-texto').textContent = 'Carregando período...';
+    }
+    
+    if (resultado.horizonte_temporal) {
+      document.getElementById('horizonte-texto').textContent = resultado.horizonte_temporal;
+    } else {
+      document.getElementById('horizonte-texto').textContent = 'Ano 2025 - Período completo';
+    }
+    
+    // Atualizar cards
+    document.getElementById('total-entrada').textContent = formatarMoeda(resultado.total_entrada);
+    document.getElementById('total-saida').textContent = formatarMoeda(resultado.total_saida);
+    document.getElementById('impacto-total').textContent = formatarMoeda(resultado.impacto_total);
+    document.getElementById('impacto-cbs').textContent = formatarMoeda(resultado.impacto_cbs);
+    document.getElementById('impacto-ibs').textContent = formatarMoeda(resultado.impacto_ibs);
+    document.getElementById('impacto-previdencia').textContent = formatarMoeda(resultado.impacto_previdencia);
+    
+    // Criar gráficos
+    criarGraficos(resultado);
+    
+    // Preencher tabela e gráfico de faturamento mensal
+    if (resultado.faturamento_mensal && resultado.faturamento_mensal.length > 0) {
+      preencherTabelaFaturamento(resultado.faturamento_mensal);
+      criarGraficoFaturamentoMensal(resultado.faturamento_mensal);
+    }
+  }
+
+  async function fetchImpacto(cnpj) {
+    try {
+      // Remove formatação do CNPJ
+      const cnpjLimpo = cnpj.replace(/[^\d]/g, '');
+      const cnpjEncoded = encodeURIComponent(cnpjLimpo);
+      const timestamp = new Date().getTime();
+      const url = `http://127.0.0.1:8000/consultar_notas/${cnpjEncoded}?_t=${timestamp}`;
+      
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      };
+      
+      // Log completo do request
+      console.log('📤 REQUEST ENVIADO:', {
+        url: url,
+        method: requestOptions.method,
+        headers: requestOptions.headers,
+        cnpj_original: cnpj,
+        cnpj_limpo: cnpjLimpo,
+        cnpj_encoded: cnpjEncoded,
+        timestamp: new Date().toISOString()
+      });
+      
+      const response = await fetch(url, requestOptions);
+      
+      // Log do status da resposta
+      console.log('📥 RESPONSE STATUS:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+        headers: Object.fromEntries(response.headers.entries())
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('❌ ERRO NA API:', error);
+        throw new Error(error.detail || 'Erro na API');
+      }
+      
+      const data = await response.json();
+      
+      // Log completo do response
+      console.log('✅ RESPONSE COMPLETO RECEBIDO:', data);
+      console.log('📊 RESUMO DOS DADOS:', {
+        nome_empresa: data.nome_empresa,
+        cnpj: data.cnpj,
+        total_entrada: data.total_entrada,
+        total_saida: data.total_saida,
+        impacto_total: data.impacto_total,
+        faturamento_mensal: data.faturamento_mensal ? `${data.faturamento_mensal.length} meses` : 'N/A',
+        debug_info: data.debug_info,
+        validacao_tributaria: data.validacao_tributaria ? 'Disponível' : 'N/A'
+      });
+      
+      return data;
+    } catch (err) {
+      console.error('❌ ERRO AO BUSCAR DADOS:', err);
+      throw err;
+    }
+  }
+
+</script>
+</body>
+</html>
+

@@ -223,6 +223,19 @@
 
       <!-- Cards de Resultados -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white rounded-2xl shadow-lg p-6 transform hover:scale-105 transition" data-aos="fade-up" data-aos-delay="50">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-dollar-sign fa-xl text-emerald-500"></i>
+              <span class="text-sm text-gray-500" id="ticker-label">Ticker</span>
+            </div>
+            <span class="text-2xl font-bold text-gray-800" id="preco-atual">R$ 0,00</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <p class="text-gray-600 text-sm">Preço da Ação (último pregão)</p>
+            <span id="modo-minimo-badge" class="hidden bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full text-xs font-semibold">Modo mínimo</span>
+          </div>
+        </div>
         <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl shadow-xl p-6 transform hover:scale-105 transition" data-aos="fade-up" data-aos-delay="100">
           <div class="flex items-center justify-between mb-4">
             <i class="fas fa-arrow-down fa-2x"></i>
@@ -1093,6 +1106,25 @@
     }
     
     // Atualizar cards
+    // Preço atual da ação
+    if (typeof resultado.preco_atual === 'number') {
+      document.getElementById('preco-atual').textContent = formatarMoeda(resultado.preco_atual);
+    } else {
+      document.getElementById('preco-atual').textContent = 'R$ 0,00';
+    }
+    // Ticker label
+    if (resultado.ticker) {
+      document.getElementById('ticker-label').textContent = resultado.ticker;
+    } else {
+      document.getElementById('ticker-label').textContent = 'Ticker';
+    }
+    // Modo mínimo badge
+    const modoMinimoBadge = document.getElementById('modo-minimo-badge');
+    if (resultado.modo_minimo === true) {
+      modoMinimoBadge.classList.remove('hidden');
+    } else {
+      modoMinimoBadge.classList.add('hidden');
+    }
     document.getElementById('total-entrada').textContent = formatarMoeda(resultado.total_entrada);
     document.getElementById('total-saida').textContent = formatarMoeda(resultado.total_saida);
     document.getElementById('impacto-total').textContent = formatarMoeda(resultado.impacto_total);
